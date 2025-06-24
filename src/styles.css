@@ -1,0 +1,48 @@
+.App {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+  padding-top: 50px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+input {
+  width: 80px;
+  padding: 10px;
+  margin: 0 5px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #125ea2;
+}
+
+.timer-display {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #444;
+}
+
+.controls {
+  margin-top: 20px;
+}

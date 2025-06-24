@@ -19,6 +19,9 @@ input {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+p{
+  color: red;
+}
 
 button {
   padding: 10px 20px;

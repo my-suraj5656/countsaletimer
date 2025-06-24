@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import "./styles.css";
-const Count = () => {
+
+export default function App() {
   const [time, settime] = useState({
     hours: "",
     minutes: "",
@@ -10,6 +11,7 @@ const Count = () => {
   const [flag, setflag] = useState(false);
   const [isrunner, setisrunner] = useState(false);
   const [timeid, settimeid] = useState(null);
+  const [err, seterr] = useState({ hours: "", minutes: "", seconds: "" });
 
   const handleinputchange = (e) => {
     const { name, value } = e.target;
@@ -19,9 +21,38 @@ const Count = () => {
     }));
   };
 
-  const handlestart = () => {
-    if (time.hours === "" || time.minutes === "" || time.seconds === "") {
+  const validation = (time) => {
+    const { hours, minutes, seconds } = time;
+    const error = {
+      hours: "",
+      minutes: "",
+      seconds: "",
+    };
+    let valid = true;
+    if (hours === "" || minutes === "" || seconds === "") {
       alert("Please fill the field");
+      valid = false;
+    }
+    if (parseInt(hours) > 24) {
+      error.hours = "hours must be < 24";
+      valid = false;
+    }
+    if (parseInt(minutes) > 59) {
+      error.minutes = "minutes must be < 60";
+      valid = false;
+    }
+    if (parseInt(seconds) > 59) {
+      error.seconds = "second must be < 60";
+      valid = false;
+    }
+    seterr(error);
+    return valid;
+  };
+
+  const handlestart = () => {
+    const valid = validation(time);
+
+    if (!valid) {
       return;
     }
     setflag(true);
@@ -99,6 +130,7 @@ const Count = () => {
             name="hours"
             onChange={handleinputchange}
           />
+          {err.hours ? <p>{err.hours}</p> : ""}
           <input
             type="number"
             placeholder="MM"
@@ -106,6 +138,8 @@ const Count = () => {
             name="minutes"
             onChange={handleinputchange}
           />
+          {err.minutes ? <p>{err.minutes}</p> : ""}
+
           <input
             type="number"
             placeholder="SS"
@@ -113,6 +147,8 @@ const Count = () => {
             name="seconds"
             onChange={handleinputchange}
           />
+          {err.seconds ? <p>{err.seconds}</p> : ""}
+
           <div className="controls">
             <button onClick={handlestart}>Start</button>
           </div>
@@ -137,6 +173,4 @@ const Count = () => {
       )}
     </div>
   );
-};
-
-export default Count;
+}
